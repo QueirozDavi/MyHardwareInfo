@@ -1,4 +1,7 @@
 package com.ustore.mhinfo.domain;
 
+import lombok.Data;
+
+@Data
 public class HardwareSummaryDTO {
 }

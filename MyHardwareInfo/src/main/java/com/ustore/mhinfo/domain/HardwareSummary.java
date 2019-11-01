@@ -1,13 +1,13 @@
-package com.ustore.MyHardwareInfo.domain;
+package com.ustore.mhinfo.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class HardwareSummary {
 
-    private String memory;
+    private Disk disk;
+    private Memory memory;
 
-    private String cpu;
-
-    private String disk;
 }
