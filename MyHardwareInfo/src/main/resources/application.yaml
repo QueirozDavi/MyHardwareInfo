@@ -1,0 +1,8 @@
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    application:
+      name: my_hardware_info
+
+server:
+  port: 8081

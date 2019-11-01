@@ -1,4 +1,4 @@
-package com.ustore.MyHardwareInfo;
+package com.ustore.mhinfo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
