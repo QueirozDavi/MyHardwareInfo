@@ -22,10 +22,10 @@ public class ResourceCollectorService {
     @Autowired
     public ResourceCollectorService() {
         this.memoryMXBean = ManagementFactory.getMemoryMXBean();
-        this.file = new File(operationalSystem);
     }
 
     public HardwareSummary getHardwareSummary() {
+        this.file = new File(operationalSystem);
         return new HardwareSummary(getDiskInformation(), getMemoryInformation());
     }
 
