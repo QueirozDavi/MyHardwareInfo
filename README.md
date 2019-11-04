@@ -15,6 +15,8 @@
 * Swagger
 * Spring Security 
 * Lombok
+* Mockito
+* JUnit 4
 
 
 ### Contact? ###
@@ -28,3 +30,5 @@
 ## NEED TO KNOW
 
 * base URL: http://localhost:8081/v1/hardware-summary
+* Swagger api docs URL: http://localhost:8081/v2/api-docs
+* Swagger api URL: http://localhost:8081/swagger-ui.html
