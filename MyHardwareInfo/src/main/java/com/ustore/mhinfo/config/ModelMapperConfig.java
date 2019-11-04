@@ -1,5 +1,6 @@
 package com.ustore.mhinfo.config;
 
+import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.Disk;
 import com.ustore.mhinfo.domain.HardwareSummary;
 import com.ustore.mhinfo.domain.Memory;
@@ -9,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.lang.management.ThreadInfo;
+
 @Configuration
 public class ModelMapperConfig {
 
@@ -16,7 +19,20 @@ public class ModelMapperConfig {
     public ModelMapper getModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(getMapMyHardwareSummaryDTOMapper(), HardwareSummary.class, HardwareSummaryDTO.class);
+        modelMapper.addConverter(getMapCpuInfoMapper(), ThreadInfo.class, CpuInfo.class);
         return modelMapper;
+    }
+
+    private Converter<ThreadInfo, CpuInfo> getMapCpuInfoMapper() {
+        return context -> {
+
+            ThreadInfo source = context.getSource();
+            CpuInfo cpuInfo = new CpuInfo();
+            cpuInfo.setThreadName(source.getThreadName());
+            cpuInfo.setThreadState(source.getThreadState().name());
+
+            return cpuInfo;
+        };
     }
 
     private Converter<HardwareSummary, HardwareSummaryDTO> getMapMyHardwareSummaryDTOMapper() {
@@ -25,6 +41,7 @@ public class ModelMapperConfig {
             HardwareSummaryDTO hardwareSummaryDTO = new HardwareSummaryDTO();
             setDiskInformation(hardwareSummaryDTO, source.getDisk());
             setMemoryInformation(hardwareSummaryDTO, source.getMemory());
+            hardwareSummaryDTO.setCpuInfo(source.getCpuInfos());
 
             return hardwareSummaryDTO;
         };

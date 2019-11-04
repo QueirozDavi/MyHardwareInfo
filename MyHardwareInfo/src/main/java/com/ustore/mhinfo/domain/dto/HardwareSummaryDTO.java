@@ -1,6 +1,9 @@
 package com.ustore.mhinfo.domain.dto;
 
+import com.ustore.mhinfo.domain.CpuInfo;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class HardwareSummaryDTO {
@@ -12,4 +15,6 @@ public class HardwareSummaryDTO {
     private String usedHeapMemory;
     private String maxHeapMemory;
     private String commitedMemory;
+    private List<CpuInfo> cpuInfo;
+
 }
