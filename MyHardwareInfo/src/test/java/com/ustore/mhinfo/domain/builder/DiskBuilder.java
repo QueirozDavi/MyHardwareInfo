@@ -16,7 +16,7 @@ public class DiskBuilder {
         if (disk.getTotalDiskSpace() <= 0 &&
                 disk.getFreeSpace() <= 0 &&
                 disk.getUsableSpace() <= 0)
-            throw new NullPointerException("At least one parameter must be set.");
+            throw new IllegalArgumentException("At least one parameter must be set.");
 
         return disk;
     }

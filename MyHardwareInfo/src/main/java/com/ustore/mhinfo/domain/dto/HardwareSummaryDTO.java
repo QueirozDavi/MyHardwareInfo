@@ -14,7 +14,7 @@ public class HardwareSummaryDTO {
     private String initialMemory;
     private String usedHeapMemory;
     private String maxHeapMemory;
-    private String commitedMemory;
-    private List<CpuInfo> cpuInfo;
+    private String committedHeapMemory;
+    private List<CpuInfo> cpuInfos;
 
 }

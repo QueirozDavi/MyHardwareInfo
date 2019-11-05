@@ -16,7 +16,7 @@ public class CpuInfoBuilder {
         if (Objects.isNull(cpuInfo.getCpuTime()) &&
                 Objects.isNull(cpuInfo.getThreadName()) &&
                 Objects.isNull(cpuInfo.getThreadState()))
-            throw new NullPointerException("At least one parameter must be set.");
+            throw new IllegalArgumentException("At least one parameter must be set.");
 
         return cpuInfo;
     }

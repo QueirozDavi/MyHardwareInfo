@@ -24,7 +24,7 @@ public class HardwareSummaryBuilder {
         if (Objects.isNull(hardwareSummary.getDisk()) &&
                 Objects.isNull(hardwareSummary.getMemory()) &&
                 CollectionUtils.isEmpty(hardwareSummary.getCpuInfos()))
-            throw new NullPointerException("At least one parameter must be set.");
+            throw new IllegalArgumentException("At least one parameter must be set.");
 
         return hardwareSummary;
     }

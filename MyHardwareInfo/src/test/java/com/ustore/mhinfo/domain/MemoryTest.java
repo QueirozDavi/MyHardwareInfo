@@ -28,7 +28,7 @@ public class MemoryTest {
     }
 
     @Test
-    public void shouldCreateDiskWithAllParameters() {
+    public void shouldCreateDiskWithAllParameters(){
         Memory memory = new MemoryBuilder()
                 .withCommittedMemory(committedMemory)
                 .withInitialMemory(initialMemory)
@@ -43,7 +43,7 @@ public class MemoryTest {
         getAssertsMaxHeapMemory(memory);
     }
 
-    @Test( expected = NullPointerException.class)
+    @Test( expected = IllegalArgumentException.class)
     public void shouldNotCreateNotDiskWithOuAllParameters() {
         Memory memory = new MemoryBuilder().build();
     }
