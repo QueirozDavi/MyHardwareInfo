@@ -43,7 +43,7 @@ public class ResourceCollectorService {
     private List<CpuInfo> getCpuListInformations() {
 
         List<CpuInfo> cpuInfos = new ArrayList<>();
-        for(Long threadId : threadMXBean.getAllThreadIds()) {
+        for (Long threadId : threadMXBean.getAllThreadIds()) {
             ThreadInfo threadInfo = threadMXBean.getThreadInfo(threadId);
             CpuInfo cpuInfo = modelMapper.map(threadInfo, CpuInfo.class);
             cpuInfo.setCpuTime(String.format("CPU time: %s ns", threadMXBean.getThreadCpuTime(threadId)));
@@ -55,24 +55,11 @@ public class ResourceCollectorService {
     }
 
     private Disk getDiskInformation() {
-
-        Disk disk = new Disk();
-        disk.setTotalDiskSpace(file.getTotalSpace());
-        disk.setFreeSpace(file.getFreeSpace());
-        disk.setUsableSpace(file.getUsableSpace());
-
-        return disk;
+        return new Disk(file);
     }
 
     private Memory getMemoryInformation() {
-
-        Memory memory = new Memory();
-        memory.setInitialMemory(memoryMXBean.getHeapMemoryUsage().getInit());
-        memory.setCommittedMemory(memoryMXBean.getHeapMemoryUsage().getCommitted());
-        memory.setMaxHeapMemory(memoryMXBean.getHeapMemoryUsage().getMax());
-        memory.setUsedHeapMemory(memoryMXBean.getHeapMemoryUsage().getUsed());
-
-        return memory;
+        return new Memory(memoryMXBean);
     }
 
 
