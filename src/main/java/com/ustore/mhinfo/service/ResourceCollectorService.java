@@ -14,7 +14,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +35,11 @@ public class ResourceCollectorService {
     }
 
     public HardwareSummary getHardwareSummary() {
-        this.file = new File(operationalSystem);
+        this.file = new File(getWindowsPathValue());
         return new HardwareSummary(getDiskInformation(), getMemoryInformation(), getCpuListInformations());
     }
 
-    private List<CpuInfo> getCpuListInformations() {
+    public List<CpuInfo> getCpuListInformations() {
 
         List<CpuInfo> cpuInfos = new ArrayList<>();
         for (Long threadId : threadMXBean.getAllThreadIds()) {
@@ -62,5 +61,7 @@ public class ResourceCollectorService {
         return new Memory(memoryMXBean);
     }
 
-
+    public String getWindowsPathValue() {
+        return operationalSystem;
+    }
 }
