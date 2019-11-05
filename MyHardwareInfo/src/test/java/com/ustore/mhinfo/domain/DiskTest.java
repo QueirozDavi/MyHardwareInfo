@@ -38,7 +38,7 @@ public class DiskTest {
         getAssertsUsableSpace(disk);
     }
 
-    @Test( expected = NullPointerException.class)
+    @Test( expected = IllegalArgumentException.class)
     public void shouldNotCreateNotDiskWithOuAllParameters() {
         Disk disk = new DiskBuilder().build();
     }

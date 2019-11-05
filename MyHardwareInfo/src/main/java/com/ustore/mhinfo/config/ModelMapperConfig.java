@@ -15,6 +15,8 @@ import java.lang.management.ThreadInfo;
 @Configuration
 public class ModelMapperConfig {
 
+    private static final long CONVERT_NUMBER = 1073741824;
+
     @Bean
     public ModelMapper getModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
@@ -41,7 +43,7 @@ public class ModelMapperConfig {
             HardwareSummaryDTO hardwareSummaryDTO = new HardwareSummaryDTO();
             setDiskInformation(hardwareSummaryDTO, source.getDisk());
             setMemoryInformation(hardwareSummaryDTO, source.getMemory());
-            hardwareSummaryDTO.setCpuInfo(source.getCpuInfos());
+            hardwareSummaryDTO.setCpuInfos(source.getCpuInfos());
 
             return hardwareSummaryDTO;
         };
@@ -49,22 +51,22 @@ public class ModelMapperConfig {
 
     private void setMemoryInformation(HardwareSummaryDTO hardwareSummaryDTO, Memory memory) {
         hardwareSummaryDTO.setInitialMemory(String.format("Initial memory: %.2f GB",
-                memory.getInitialMemory() /1073741824));
+                memory.getInitialMemory() /CONVERT_NUMBER));
         hardwareSummaryDTO.setUsedHeapMemory(String.format("Used heap memory: %.2f GB",
-                memory.getUsedHeapMemory() /1073741824));
+                memory.getUsedHeapMemory() /CONVERT_NUMBER));
         hardwareSummaryDTO.setMaxHeapMemory(String.format("Max heap memory: %.2f GB",
-                memory.getMaxHeapMemory() /1073741824));
-        hardwareSummaryDTO.setCommitedMemory(String.format("Committed memory: %.2f GB",
-                memory.getCommittedMemory() /1073741824));
+                memory.getMaxHeapMemory() /CONVERT_NUMBER));
+        hardwareSummaryDTO.setCommittedHeapMemory(String.format("Committed memory: %.2f GB",
+                memory.getCommittedMemory() /CONVERT_NUMBER));
     }
 
     private void setDiskInformation(HardwareSummaryDTO hardwareSummaryDTO, Disk disk) {
         hardwareSummaryDTO.setFreeDiskSpace(String.format("Free space: %.2f GB",
-                (double) disk.getFreeSpace() / 1073741824));
+                (double) disk.getFreeSpace() / CONVERT_NUMBER));
         hardwareSummaryDTO.setTotalDiskSpace(String.format("Total space: %.2f GB",
-                (double) disk.getTotalDiskSpace() / 1073741824));
+                (double) disk.getTotalDiskSpace() / CONVERT_NUMBER));
         hardwareSummaryDTO.setUsableDiskSpace(String.format("Usable space: %.2f GB",
-                (double) disk.getUsableSpace() / 1073741824));
+                (double) disk.getUsableSpace() / CONVERT_NUMBER));
     }
 
 }

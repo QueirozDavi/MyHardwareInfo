@@ -4,7 +4,6 @@ import com.ustore.mhinfo.domain.builder.CpuInfoBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import java.util.Objects;
 
 import static org.junit.Assert.*;
@@ -38,7 +37,7 @@ public class CpuInfoTest {
         getAssertsCpuThreadState(cpuInfo);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldNotCreateCpuInfoWithOutAllParameters() {
         CpuInfo cpuInfo = new CpuInfoBuilder().build();
     }

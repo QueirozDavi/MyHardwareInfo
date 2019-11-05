@@ -6,10 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class HardwareSummaryTest {
 
@@ -34,14 +36,14 @@ public class HardwareSummaryTest {
                 .build();
 
         assertTrue(Objects.nonNull(hardwareSummary));
-        getAssertsDisk(hardwareSummary);
-        getAssertsMemory(hardwareSummary);
-        getAssertsCpuInfos(hardwareSummary);
+        assertDisk(hardwareSummary.getDisk());
+        assertMemory(hardwareSummary.getMemory());
+        assertCpuInfos(hardwareSummary.getCpuInfos());
 
     }
 
-    @Test( expected = NullPointerException.class)
-    public void shouldNotCreateNotHardwareSummaryWithOuAllParameters() {
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotCreateHardwareSummaryWithOuAllParameters() {
         HardwareSummary hardwareSummary = new HardwareSummaryBuilder().build();
     }
 
@@ -51,7 +53,7 @@ public class HardwareSummaryTest {
                 .withDisk(disk)
                 .build();
 
-        getAssertsDisk(hardwareSummary);
+        assertDisk(hardwareSummary.getDisk());
     }
 
     @Test
@@ -60,7 +62,7 @@ public class HardwareSummaryTest {
                 .withMemory(memory)
                 .build();
 
-        getAssertsMemory(hardwareSummary);
+        assertMemory(hardwareSummary.getMemory());
     }
 
     @Test
@@ -69,40 +71,34 @@ public class HardwareSummaryTest {
                 .withCupInfos(cpuInfos)
                 .build();
 
-        getAssertsCpuInfos(hardwareSummary);
+        assertCpuInfos(hardwareSummary.getCpuInfos());
     }
 
-    private void getAssertsMemory(HardwareSummary hardwareSummary) {
-        assertNotNull(hardwareSummary.getMemory());
-        assertEquals(hardwareSummary.getMemory().getUsedHeapMemory(), memory.getUsedHeapMemory(), delta);
-        assertEquals(hardwareSummary.getMemory().getMaxHeapMemory(), memory.getMaxHeapMemory(), delta);
-        assertEquals(hardwareSummary.getMemory().getCommittedMemory(), memory.getCommittedMemory(), delta);
-        assertEquals(hardwareSummary.getMemory().getInitialMemory(), memory.getInitialMemory(), delta);
+    private void assertMemory(Memory memory) {
+        assertNotNull(memory);
+        assertEquals(memory.getUsedHeapMemory(), memory.getUsedHeapMemory(), delta);
+        assertEquals(memory.getMaxHeapMemory(), memory.getMaxHeapMemory(), delta);
+        assertEquals(memory.getCommittedMemory(), memory.getCommittedMemory(), delta);
+        assertEquals(memory.getInitialMemory(), memory.getInitialMemory(), delta);
     }
 
-    private void getAssertsDisk(HardwareSummary hardwareSummary) {
-        assertNotNull(hardwareSummary.getDisk());
-        assertEquals(hardwareSummary.getDisk().getUsableSpace(), disk.getUsableSpace());
-        assertEquals(hardwareSummary.getDisk().getFreeSpace(), disk.getFreeSpace());
-        assertEquals(hardwareSummary.getDisk().getTotalDiskSpace(), disk.getTotalDiskSpace());
+    private void assertDisk(Disk disk) {
+        assertNotNull(disk);
+        assertEquals(disk.getUsableSpace(), this.disk.getUsableSpace());
+        assertEquals(disk.getFreeSpace(), this.disk.getFreeSpace());
+        assertEquals(disk.getTotalDiskSpace(), this.disk.getTotalDiskSpace());
     }
 
-    private void getAssertsCpuInfos(HardwareSummary hardwareSummary) {
-        assertFalse(CollectionUtils.isEmpty(hardwareSummary.getCpuInfos()));
-        assertTrue(hardwareSummary.getCpuInfos().size() > 0);
-        assertTrue(hardwareSummary.getCpuInfos().size() == 4);
-        assertEquals(hardwareSummary.getCpuInfos().get(0).getCpuTime(), cpuInfos.get(0).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(1).getCpuTime(), cpuInfos.get(1).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(2).getCpuTime(), cpuInfos.get(2).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(3).getCpuTime(), cpuInfos.get(3).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(0).getThreadName(), cpuInfos.get(0).getThreadName());
-        assertEquals(hardwareSummary.getCpuInfos().get(1).getThreadName(), cpuInfos.get(1).getThreadName());
-        assertEquals(hardwareSummary.getCpuInfos().get(2).getThreadName(), cpuInfos.get(2).getThreadName());
-        assertEquals(hardwareSummary.getCpuInfos().get(3).getThreadName(), cpuInfos.get(3).getThreadName());
-        assertEquals(hardwareSummary.getCpuInfos().get(0).getCpuTime(), cpuInfos.get(0).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(1).getCpuTime(), cpuInfos.get(1).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(2).getCpuTime(), cpuInfos.get(2).getCpuTime());
-        assertEquals(hardwareSummary.getCpuInfos().get(3).getCpuTime(), cpuInfos.get(3).getCpuTime());
+    private void assertCpuInfos(List<CpuInfo> cpuInfos) {
+        assertFalse(CollectionUtils.isEmpty(cpuInfos));
+        assertTrue(cpuInfos.size() > 0);
+        assertEquals(cpuInfos.size(), 4);
+
+        for (CpuInfo cpuInfo : cpuInfos) {
+            assertEquals(cpuInfo.getThreadState(), this.cpuInfos.get(this.cpuInfos.indexOf(cpuInfo)).getThreadState());
+            assertEquals(cpuInfo.getThreadName(), this.cpuInfos.get(this.cpuInfos.indexOf(cpuInfo)).getThreadName());
+            assertEquals(cpuInfo.getCpuTime(), this.cpuInfos.get(this.cpuInfos.indexOf(cpuInfo)).getCpuTime());
+        }
     }
 
 }
