@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/QueirozDavi/MyHardwareInfo.svg?branch=master)](https://travis-ci.org/QueirozDavi/MyHardwareInfo)
+
 # MyHardwareInfo
 
 ### What is this repository for? ###
