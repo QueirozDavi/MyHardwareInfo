@@ -21,7 +21,7 @@
 
 ### Contact? ###
 
-* contato: daviqueiroz92@gmail.com
+* e-mail: daviqueiroz92@gmail.com
 
 ## How to execute
 
