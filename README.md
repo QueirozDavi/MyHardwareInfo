@@ -3,7 +3,7 @@
 ### What is this repository for? ###
 
 * MicroService who displays hardware info, like CPU, Memory and Disk informations.
-* compatilble with windows OS or Linux OS, you just have to choose waht value you will use and set on ResourceCollectorService at operationalSystem variable
+* compatilble with windows OS or Linux OS, you just have to choose what value you will use and set on ResourceCollectorService at operationalSystem variable
 * Version (1.0)
 
 ### Technologies? ###
@@ -13,7 +13,6 @@
 * Jackson
 * ModelMapper
 * Swagger
-* Spring Security 
 * Lombok
 * Mockito
 * JUnit 4
