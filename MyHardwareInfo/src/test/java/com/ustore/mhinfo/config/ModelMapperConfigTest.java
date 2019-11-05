@@ -60,6 +60,14 @@ public class ModelMapperConfigTest {
     public void shouldReturnCompleteHardwareSummaryDTOWhenPassHardwareSummary() {
 
         HardwareSummaryDTO hardwareSummaryDTO = modelMapper.map(this.hardwareSummary, HardwareSummaryDTO.class);
+        assertNotNull(hardwareSummaryDTO.getUsableDiskSpace());
+        assertNotNull(hardwareSummaryDTO.getTotalDiskSpace());
+        assertNotNull(hardwareSummaryDTO.getMaxHeapMemory());
+        assertNotNull(hardwareSummaryDTO.getInitialMemory());
+        assertNotNull(hardwareSummaryDTO.getFreeDiskSpace());
+        assertNotNull(hardwareSummaryDTO.getCommittedHeapMemory());
+        assertNotNull(hardwareSummaryDTO.getUsedHeapMemory());
+        assertCpuInfos(hardwareSummaryDTO.getCpuInfos());
     }
 
     private void assertCpuInfos(List<CpuInfo> cpuInfos) {
