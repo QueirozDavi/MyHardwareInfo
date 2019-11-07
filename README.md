@@ -18,6 +18,7 @@
 * Lombok
 * Mockito
 * JUnit 4
+* TravisCI (Building the project and executing tests to guarantee continuous integration)
 
 
 ### Contact? ###
