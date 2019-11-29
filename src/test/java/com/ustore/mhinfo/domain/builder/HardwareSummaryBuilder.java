@@ -3,7 +3,7 @@ package com.ustore.mhinfo.domain.builder;
 import com.ustore.mhinfo.config.MockFactory;
 import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.Disk;
-import com.ustore.mhinfo.domain.HardwareSummary;
+import com.ustore.mhinfo.domain.HardwareInfo;
 import com.ustore.mhinfo.domain.Memory;
 import lombok.Data;
 import org.springframework.util.CollectionUtils;
@@ -14,27 +14,27 @@ import java.util.Objects;
 @Data
 public class HardwareSummaryBuilder {
 
-    private HardwareSummary hardwareSummary;
+    private HardwareInfo hardwareInfo;
 
     public HardwareSummaryBuilder() {
-        hardwareSummary = new HardwareSummary();
+        hardwareInfo = new HardwareInfo();
     }
 
-    public HardwareSummary build() {
-        if (Objects.isNull(hardwareSummary.getDisk()) &&
-                Objects.isNull(hardwareSummary.getMemory()) &&
-                CollectionUtils.isEmpty(hardwareSummary.getCpuInfos()))
+    public HardwareInfo build() {
+        if (Objects.isNull(hardwareInfo.getDisk()) &&
+                Objects.isNull(hardwareInfo.getMemory()) &&
+                CollectionUtils.isEmpty(hardwareInfo.getCpuInfos()))
             throw new IllegalArgumentException("At least one parameter must be set.");
 
-        return hardwareSummary;
+        return hardwareInfo;
     }
 
     public HardwareSummaryBuilder withCupInfos(List<CpuInfo> cupInfos) {
 
         if (CollectionUtils.isEmpty(cupInfos))
-            hardwareSummary.setCpuInfos(cupInfos);
+            hardwareInfo.setCpuInfos(cupInfos);
         else
-            hardwareSummary.setCpuInfos(new MockFactory().getCpuInfos());
+            hardwareInfo.setCpuInfos(new MockFactory().getCpuInfos());
 
         return this;
     }
@@ -42,9 +42,9 @@ public class HardwareSummaryBuilder {
     public HardwareSummaryBuilder withDisk(Disk disk) {
 
         if(Objects.nonNull(disk))
-            hardwareSummary.setDisk(disk);
+            hardwareInfo.setDisk(disk);
         else
-            hardwareSummary.setDisk(new MockFactory().getDisks().get(0));
+            hardwareInfo.setDisk(new MockFactory().getDisks().get(0));
 
         return this;
     }
@@ -52,9 +52,9 @@ public class HardwareSummaryBuilder {
     public HardwareSummaryBuilder withMemory(Memory memory) {
 
         if(Objects.nonNull(memory))
-            hardwareSummary.setMemory(memory);
+            hardwareInfo.setMemory(memory);
         else
-            hardwareSummary.setMemory(new MockFactory().getMemories().get(0));
+            hardwareInfo.setMemory(new MockFactory().getMemories().get(0));
 
         return this;
     }

@@ -1,5 +1,6 @@
 package com.ustore.mhinfo.controller.v1;
 
+import com.ustore.mhinfo.domain.HardwareInfo;
 import com.ustore.mhinfo.domain.dto.HardwareSummaryDTO;
 import com.ustore.mhinfo.service.ResourceCollectorService;
 import org.modelmapper.ModelMapper;
@@ -23,7 +24,12 @@ public class HardwareSummaryController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping()
+    @GetMapping
+    public HardwareInfo getHardwareInfo() {
+        return resourceCollectorService.getHardwareSummary();
+    }
+
+    @GetMapping("/summary")
     public HardwareSummaryDTO getHardwareSummary() {
         return modelMapper.map(resourceCollectorService.getHardwareSummary(), HardwareSummaryDTO.class);
     }

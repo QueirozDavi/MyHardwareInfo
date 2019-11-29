@@ -4,7 +4,7 @@ import com.ustore.mhinfo.MyHardwareInfoApplication;
 import com.ustore.mhinfo.config.MockFactory;
 import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.Disk;
-import com.ustore.mhinfo.domain.HardwareSummary;
+import com.ustore.mhinfo.domain.HardwareInfo;
 import com.ustore.mhinfo.domain.Memory;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,11 +45,11 @@ public class ResourceCollectorServiceTest {
 
         when(modelMapper.map(ThreadInfo.class, CpuInfo.class)).thenReturn(new MockFactory().getCpuInfos().get(0));
 
-        HardwareSummary hardwareSummary = resourceCollectorService.getHardwareSummary();
+        HardwareInfo hardwareInfo = resourceCollectorService.getHardwareSummary();
 
-        assertDisk(hardwareSummary.getDisk());
-        assertCpuInfos(hardwareSummary.getCpuInfos());
-        assertMemory(hardwareSummary.getMemory());
+        assertDisk(hardwareInfo.getDisk());
+        assertCpuInfos(hardwareInfo.getCpuInfos());
+        assertMemory(hardwareInfo.getMemory());
     }
 
     private void assertMemory(Memory memory) {

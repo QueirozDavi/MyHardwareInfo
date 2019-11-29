@@ -2,7 +2,7 @@ package com.ustore.mhinfo.config;
 
 import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.Disk;
-import com.ustore.mhinfo.domain.HardwareSummary;
+import com.ustore.mhinfo.domain.HardwareInfo;
 import com.ustore.mhinfo.domain.Memory;
 import com.ustore.mhinfo.domain.dto.HardwareSummaryDTO;
 import org.modelmapper.Converter;
@@ -20,7 +20,7 @@ public class ModelMapperConfig {
     @Bean
     public ModelMapper getModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.addConverter(getMapMyHardwareSummaryDTOMapper(), HardwareSummary.class, HardwareSummaryDTO.class);
+        modelMapper.addConverter(getMapMyHardwareSummaryDTOMapper(), HardwareInfo.class, HardwareSummaryDTO.class);
         modelMapper.addConverter(getMapCpuInfoMapper(), ThreadInfo.class, CpuInfo.class);
         return modelMapper;
     }
@@ -37,9 +37,9 @@ public class ModelMapperConfig {
         };
     }
 
-    private Converter<HardwareSummary, HardwareSummaryDTO> getMapMyHardwareSummaryDTOMapper() {
+    private Converter<HardwareInfo, HardwareSummaryDTO> getMapMyHardwareSummaryDTOMapper() {
         return context -> {
-            HardwareSummary source = context.getSource();
+            HardwareInfo source = context.getSource();
             HardwareSummaryDTO hardwareSummaryDTO = new HardwareSummaryDTO();
             setDiskInformation(hardwareSummaryDTO, source.getDisk());
             setMemoryInformation(hardwareSummaryDTO, source.getMemory());

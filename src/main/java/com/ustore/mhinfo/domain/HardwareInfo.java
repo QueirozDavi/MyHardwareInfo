@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HardwareSummary {
+public class HardwareInfo {
 
     private Disk disk;
     private Memory memory;
