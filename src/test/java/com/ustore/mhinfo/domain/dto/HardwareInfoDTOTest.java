@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class HardwareSummaryDTOTest {
+public class HardwareInfoDTOTest {
 
     private String totalDiskSpace;
     private String freeDiskSpace;
