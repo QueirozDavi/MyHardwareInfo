@@ -2,7 +2,6 @@ package com.ustore.mhinfo.config;
 
 import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.Disk;
-import com.ustore.mhinfo.domain.HardwareSummary;
 import com.ustore.mhinfo.domain.Memory;
 import com.ustore.mhinfo.domain.builder.CpuInfoBuilder;
 import com.ustore.mhinfo.domain.builder.DiskBuilder;

@@ -2,7 +2,7 @@ package com.ustore.mhinfo.service;
 
 import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.Disk;
-import com.ustore.mhinfo.domain.HardwareSummary;
+import com.ustore.mhinfo.domain.HardwareInfo;
 import com.ustore.mhinfo.domain.Memory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +34,9 @@ public class ResourceCollectorService {
         this.threadMXBean = ManagementFactory.getThreadMXBean();
     }
 
-    public HardwareSummary getHardwareSummary() {
+    public HardwareInfo getHardwareSummary() {
         this.file = new File(getWindowsPathValue());
-        return new HardwareSummary(getDiskInformation(), getMemoryInformation(), getCpuListInformations());
+        return new HardwareInfo(getDiskInformation(), getMemoryInformation(), getCpuListInformations());
     }
 
     public List<CpuInfo> getCpuListInformations() {

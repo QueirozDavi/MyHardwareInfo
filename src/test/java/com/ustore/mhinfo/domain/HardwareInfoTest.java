@@ -6,14 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
-public class HardwareSummaryTest {
+public class HardwareInfoTest {
 
     private Disk disk;
     private Memory memory;
@@ -29,49 +28,49 @@ public class HardwareSummaryTest {
 
     @Test
     public void shouldCreateDiskWithAllParameters() {
-        HardwareSummary hardwareSummary = new HardwareSummaryBuilder()
+        HardwareInfo hardwareInfo = new HardwareSummaryBuilder()
                 .withCupInfos(cpuInfos)
                 .withDisk(disk)
                 .withMemory(memory)
                 .build();
 
-        assertTrue(Objects.nonNull(hardwareSummary));
-        assertDisk(hardwareSummary.getDisk());
-        assertMemory(hardwareSummary.getMemory());
-        assertCpuInfos(hardwareSummary.getCpuInfos());
+        assertTrue(Objects.nonNull(hardwareInfo));
+        assertDisk(hardwareInfo.getDisk());
+        assertMemory(hardwareInfo.getMemory());
+        assertCpuInfos(hardwareInfo.getCpuInfos());
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotCreateHardwareSummaryWithOuAllParameters() {
-        HardwareSummary hardwareSummary = new HardwareSummaryBuilder().build();
+        HardwareInfo hardwareInfo = new HardwareSummaryBuilder().build();
     }
 
     @Test
     public void shouldCreateHardwareSummaryWithDiskOnly() {
-        HardwareSummary hardwareSummary = new HardwareSummaryBuilder()
+        HardwareInfo hardwareInfo = new HardwareSummaryBuilder()
                 .withDisk(disk)
                 .build();
 
-        assertDisk(hardwareSummary.getDisk());
+        assertDisk(hardwareInfo.getDisk());
     }
 
     @Test
     public void shouldCreateHardwareSummaryWithMemoryOnly() {
-        HardwareSummary hardwareSummary = new HardwareSummaryBuilder()
+        HardwareInfo hardwareInfo = new HardwareSummaryBuilder()
                 .withMemory(memory)
                 .build();
 
-        assertMemory(hardwareSummary.getMemory());
+        assertMemory(hardwareInfo.getMemory());
     }
 
     @Test
     public void shouldCreateHardwareSummaryWithCpuInfosOnly() {
-        HardwareSummary hardwareSummary = new HardwareSummaryBuilder()
+        HardwareInfo hardwareInfo = new HardwareSummaryBuilder()
                 .withCupInfos(cpuInfos)
                 .build();
 
-        assertCpuInfos(hardwareSummary.getCpuInfos());
+        assertCpuInfos(hardwareInfo.getCpuInfos());
     }
 
     private void assertMemory(Memory memory) {
