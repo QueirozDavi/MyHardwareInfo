@@ -1,5 +1,6 @@
 package com.ustore.mhinfo.controller.v1;
 
+import com.ustore.mhinfo.domain.CpuInfo;
 import com.ustore.mhinfo.domain.HardwareInfo;
 import com.ustore.mhinfo.domain.dto.HardwareSummaryDTO;
 import com.ustore.mhinfo.service.ResourceCollectorService;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/hardware-summary")
@@ -27,6 +30,11 @@ public class HardwareSummaryController {
     @GetMapping
     public HardwareInfo getHardwareInfo() {
         return resourceCollectorService.getHardwareSummary();
+    }
+
+    @GetMapping("/current-cpu-info")
+    public List<CpuInfo> getCurrentCpuInfo() {
+        return resourceCollectorService.getCpuListInformations();
     }
 
     @GetMapping("/summary")
