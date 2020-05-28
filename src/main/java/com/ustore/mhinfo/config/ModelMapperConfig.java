@@ -58,6 +58,8 @@ public class ModelMapperConfig {
                 memory.getMaxHeapMemory() /CONVERT_NUMBER));
         hardwareSummaryDTO.setCommittedHeapMemory(String.format("Committed memory: %.2f GB",
                 memory.getCommittedMemory() /CONVERT_NUMBER));
+        hardwareSummaryDTO.setTotalOpMemory(String.format("Total memory: %.2f GB",
+                memory.getTotalOpMemory()));
     }
 
     private void setDiskInformation(HardwareSummaryDTO hardwareSummaryDTO, Disk disk) {

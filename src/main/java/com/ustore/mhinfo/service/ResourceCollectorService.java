@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.management.Attribute;
+import javax.management.InstanceNotFoundException;
+import javax.management.ReflectionException;
 import java.io.File;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
+import java.lang.management.*;
+import java.text.CharacterIterator;
+import java.text.DecimalFormat;
+import java.text.StringCharacterIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -36,7 +40,35 @@ public class ResourceCollectorService {
 
     public HardwareInfo getHardwareSummary() {
         this.file = new File(getWindowsPathValue());
-        return new HardwareInfo(getDiskInformation(), getMemoryInformation(), getCpuListInformations());
+        HardwareInfo hardwareInfo = new HardwareInfo(getDiskInformation(), getMemoryInformation(),
+                getCpuListInformations());
+
+        String[] attr = {"TotalPhysicalMemorySize", "FreePhysicalMemorySize"};
+        OperatingSystemMXBean op = ManagementFactory.getOperatingSystemMXBean();
+
+        List<Attribute> al;
+
+        try {
+            al = ManagementFactory.getPlatformMBeanServer()
+                    .getAttributes(op.getObjectName(), attr).asList();
+        } catch (InstanceNotFoundException | ReflectionException ex) {
+            al = Collections.emptyList();
+        }
+        for (Attribute a : al) {
+
+            if (a.getName().equals("TotalPhysicalMemorySize")) {
+                hardwareInfo.getMemory().setTotalOpMemory((Long.parseLong(a.getValue().toString()) / 1000.0));
+                ConvertToReadebleDouble(hardwareInfo);
+            }
+        }
+
+        return hardwareInfo;
+    }
+
+    private void ConvertToReadebleDouble(HardwareInfo hardwareInfo) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        hardwareInfo.getMemory().setTotalOpMemory(Double.parseDouble(decimalFormat.format(hardwareInfo
+                .getMemory().getTotalOpMemory() / 1048576D).replace(",", ".")));
     }
 
     public List<CpuInfo> getCpuListInformations() {

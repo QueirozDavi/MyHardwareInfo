@@ -13,6 +13,7 @@ public class Memory {
     private double usedHeapMemory;
     private double maxHeapMemory;
     private double committedMemory;
+    private double totalOpMemory;
 
     public Memory(MemoryMXBean memoryMXBean) {
         this.setInitialMemory(memoryMXBean.getHeapMemoryUsage().getInit());
